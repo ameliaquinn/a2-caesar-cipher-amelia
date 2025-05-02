@@ -17,7 +17,7 @@ public class YourTests {
     public void decodeTests() {
         CaesarCipher classUnderTest = new CaesarCipher(25);
         assertEquals("hello", classUnderTest.decode("gdkkn"));
-        assertEquals("computer science", classUnderTest.decode("bnlotsdq rbhdmbd"));
+        assertEquals("computer science", classUnderTest.decode("dpnqvufs tdjfodf");
     }
 
 }

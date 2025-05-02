@@ -34,7 +34,7 @@ public class CaesarCipher {
      * @return int indicating position of val in the alphabet array
      */
     public int findIndex(Character val) {
-        if (Character.isLowerCase(val) == false) {
+        if (!Character.isLowerCase(val)) {
             Character.toLowerCase(val);
         }
         for (int i = 0; i < 26; i++) {
@@ -50,19 +50,15 @@ public class CaesarCipher {
      * @return encoded message */  
     public String encode(String message) {
         char[] charArray = message.toCharArray();
-        outer:
         for (int i = 0; i < charArray.length; i++) {
             if (Character.isLetter(charArray[i])) {
-                System.out.println("Letter detected.");
                 char thisChar = Character.toLowerCase(charArray[i]);
                 int index = findIndex(thisChar);
                 charArray[i] = get(index);
-                System.out.println(get(index));
             }  else {
                 charArray[i] = charArray[i];
-                continue outer;
             }
-            }
+        }
         String str = new String(charArray);
         System.out.println(str);
         return str;
@@ -75,20 +71,22 @@ public class CaesarCipher {
     */
     public String decode(String message){
         char[] charArray = message.toCharArray();
-        outer:
         for (int n = 0; n < charArray.length; n++) {
             if (Character.isLetter(charArray[n])) {
                 char thisChar = Character.toLowerCase(charArray[n]);
                 int i = findIndex(thisChar);
                 charArray[n] = cipher.get(i, offset);
-            } else {
-                continue outer;
             }
         }
         String str = new String(charArray);
         return str;
     }
 
+    /**
+     * Getter for a certain index
+     * @param index accessor
+     * @return character at that index
+     */
     public char get(int index) {
         int adjustedI = index - offset;
         if (adjustedI < 0) {
@@ -103,8 +101,9 @@ public class CaesarCipher {
     
 
     public static void main(String[] args) {
-        CaesarCipher testCipher = new CaesarCipher(8);
-        String encodedMessage = testCipher.encode("this is a secret message");
+        CaesarCipher testCipher = new CaesarCipher(25);
+        String encodedMessage = testCipher.encode("computer science");
+        System.out.println(encodedMessage);
 
     }
     
